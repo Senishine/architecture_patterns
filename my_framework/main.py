@@ -1,3 +1,6 @@
+from my_framework.requests_methods import GetRequest, PostRequest
+
+
 class Framework:
     """Base framework's class"""
 
@@ -10,6 +13,21 @@ class Framework:
 
         if not path.endswith('/'):
             path = f'{path}/'
+
+        request = {}
+        # Получаем все данные запроса
+        method = environ['REQUEST_METHOD']
+        request['method'] = method
+
+        if method == 'POST':
+            data = PostRequest().get_request(environ)
+            request['data'] = data
+            print(f'Нам пришёл post-запрос: {request["data"]}')
+
+        if method == 'GET':
+            request_params = GetRequest().get_request_params(environ)
+            request['request_params'] = request_params
+            print(f'Нам пришли GET-параметры: {request["request_params"]}')
 
         if path in self.routes_lst:  # apply page controller pattern
             view = self.routes_lst[path]
