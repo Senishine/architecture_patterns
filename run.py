@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from wsgiref.simple_server import make_server
 from my_framework.main import Framework
 from urls import routes, fronts

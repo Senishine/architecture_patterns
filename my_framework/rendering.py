@@ -10,6 +10,6 @@ def render(template_name, folder='templates', **kwargs):
     :return:
     """
     file_path = join(folder, template_name)
-    with open(file_path, encoding='utf-8') as f:
+    with open(file_path, encoding='cp1252') as f:
         template = Template(f.read())
     return template.render(**kwargs)
