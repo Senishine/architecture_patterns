@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from quopri import decodestring
 from my_framework.requests_methods import GetRequest, PostRequest
 
 
@@ -20,13 +22,11 @@ class Framework:
         request['method'] = method
 
         if method == 'POST':
-            data = PostRequest().get_request(environ)
-            request['data'] = data
+            request['data'] = PostRequest().get_request_body(environ)
             print(f'Нам пришёл post-запрос: {request["data"]}')
 
         if method == 'GET':
-            request_params = GetRequest().get_request_params(environ)
-            request['request_params'] = request_params
+            request['request_params'] = GetRequest().get_request_str(environ)
             print(f'Нам пришли GET-параметры: {request["request_params"]}')
 
         if path in self.routes_lst:  # apply page controller pattern
