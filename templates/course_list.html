@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+	List of courses
+{% endblock %}
+{% block style %}
+	{% include "inc_style.html" %}
+{% endblock %}
+{% block logo %}
+    {% include "inc_logo.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "inc_menu.html" %}
+{% endblock %}
+{% block page_content %}
+<style>
+    #site_content
+    {
+      padding: 20px 24px 500px 37px;}
+</style>
+    <div>
+        <a href="/">Back to home</a>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <a href="/create_course/?id={{id}}">Create new course</a>
+        <br>
+        <h1>Courses from category "{{name}}"</h1>
+        {% for item in objects_list %}
+        <li>
+            {{item.name}} <span><a href="/copy_course/?name={{item.name}}">copy</a></span>
+        </li>
+        {% endfor %}
+	</div>
+{% endblock %}

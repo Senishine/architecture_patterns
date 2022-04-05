@@ -2,7 +2,6 @@ from jinja2.loaders import FileSystemLoader
 from jinja2.environment import Environment
 
 
-
 def render(template_name, folder='templates', **kwargs):
     """
     :param template_name: имя шаблона
@@ -10,13 +9,8 @@ def render(template_name, folder='templates', **kwargs):
     :param kwargs: параметры
     :return:
     """
-    # file_path = join(folder, template_name)
-    # with open(file_path, encoding='cp1252') as f:
-    #     template = Template(f.read())
-    # return template.render(**kwargs)
 
     env = Environment()  # создаем объект окружения
     env.loader = FileSystemLoader(folder)  # указываем папку для поиска шаблонов
     template = env.get_template(template_name)  # находим шаблон в окружении
     return template.render(**kwargs)
-
