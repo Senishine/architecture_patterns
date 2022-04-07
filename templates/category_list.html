@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+	List of courses
+{% endblock %}
+{% block style %}
+	{% include "inc_style.html" %}
+{% endblock %}
+{% block logo %}
+    {% include "inc_logo.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "inc_menu.html" %}
+{% endblock %}
+{% block page_content %}
+<style>
+    #site_content
+    {
+      padding: 20px 24px 500px 37px;}
+</style>
+    <a href="/">Back</a>
+
+    <h1>Categories</h1>
+    <ul>
+        {% for item in objects_list %}
+        <li>
+            {{item.name}} <span>Courses: {{item.course_count()}}</span>
+        </li>
+        {% endfor %}
+    </ul>
+
+	<div>
+		<li><a href="/courses_list/">Courses</a></li>
+		<li><a href="/create_course/">Create new course</a></li>
+	</div>
+{% endblock %}

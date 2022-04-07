@@ -33,7 +33,6 @@ class Framework:
             view = self.routes_lst[path]
         else:
             view = PageNotFound404()
-        request = {}
 
         for front in self.fronts_lst:  # apply front controller pattern, fill request from front_funcs
             front(request)

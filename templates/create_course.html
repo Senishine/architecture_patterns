@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}
+	List of courses
+{% endblock %}
+{% block style %}
+	{% include "inc_style.html" %}
+{% endblock %}
+{% block logo %}
+    {% include "inc_logo.html" %}
+{% endblock %}
+{% block menu %}
+    {% include "inc_menu.html" %}
+{% endblock %}
+{% block page_content %}
+<style>
+    #site_content
+    {
+      padding: 20px 24px 500px 37px;}
+</style>
+    <div>
+        <a href="/courses_list/?id={{id}}"> Back </a>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <h1>Create a course for a category "{{name}}"</h1>
+        <form method="post">
+            <input type="text" name="name" placeholder="Course name">
+            <button type="submit">Save and return to course list</button>
+        </form>
+    </div>
+{% endblock %}
