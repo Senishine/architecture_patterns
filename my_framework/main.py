@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from quopri import decodestring
 from my_framework.requests_methods import GetRequest, PostRequest
 
 
@@ -45,3 +44,28 @@ class Framework:
 class PageNotFound404:
     def __call__(self, request):
         return '404 Error', 'Page not found, return to <a href="/">main</a> page.'
+
+
+class DebugInfo(Framework):
+    """WSGI-application —  для каждого запроса выводит информацию (тип запроса и параметры) в консоль"""
+
+    def __init__(self, routes, fronts_funcs):
+        self.application = Framework(routes, fronts_funcs)
+        super().__init__(routes, fronts_funcs)
+
+    def __call__(self, env, start_response):
+        print('DEBUG MODE')
+        print(env)
+        return self.application(env, start_response)
+
+
+class FakeApp(Framework):
+    """WSGI-application фейковый (на все запросы пользователя отвечает “200 OK”, “Hello from Fake”)"""
+
+    def __init__(self, routes, fronts_funcs):
+        self.application = Framework(routes, fronts_funcs)
+        super().__init__(routes, fronts_funcs)
+
+    def __call__(self, env, start_response):
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return b'Hello from Fake'

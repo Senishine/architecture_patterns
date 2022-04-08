@@ -13,13 +13,4 @@ def secret_key_front(request):
 
 fronts = [time_front, secret_key_front]
 
-routes = {
-    '/': HomePage(),
-    '/about/': About(),
-    '/contact/': Contact(),
-    '/create_category/': CreateCategory(),
-    '/category_list/': CategoryList(),
-    '/create_course/': CreateCourse(),
-    '/courses_list/': CoursesList(),
-    '/copy_course/': CopyCourse()
-}
+
