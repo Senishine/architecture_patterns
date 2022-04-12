@@ -1,24 +1,32 @@
 from my_framework.rendering import render
 from patterns import creational_patterns
+from patterns.structural_patterns import AppRoute, Debug
+
 
 site = creational_patterns.Engine()
+routes = {}
 
 
+@AppRoute(routes=routes, url='/')
 class HomePage:
+    @Debug(name='Index')
     def __call__(self, request):
         return '200 OK', render('index.html')
 
-
+@AppRoute(routes=routes, url='/about/')
 class About:
+    @Debug(name='About')
     def __call__(self, request):
         return '200 OK', render('about.html')
 
 
+@AppRoute(routes=routes, url='/contact/')
 class Contact:
+    @Debug(name='Contact')
     def __call__(self, request):
         return '200 OK', render('contact.html')
 
-
+@AppRoute(routes=routes, url='/create_category/')
 class CreateCategory:
     def __call__(self, request):
         if request['method'] == 'POST':
@@ -37,12 +45,12 @@ class CreateCategory:
             categories = site.categories
             return '200 OK', render('create_category.html', categories=categories)
 
-
+@AppRoute(routes=routes, url='/category_list/')
 class CategoryList:
     def __call__(self, request):
         return '200 OK', render('category_list.html', objects_list=site.categories)
 
-
+@AppRoute(routes=routes, url='/create_course/')
 class CreateCourse:
     def __call__(self, request):
         if request['method'] == 'POST':
@@ -65,7 +73,7 @@ class CreateCourse:
             except KeyError:
                 return '200 OK', 'No categories have been added yet'
 
-
+@AppRoute(routes=routes, url='/courses_list/')
 class CoursesList:
     def __call__(self, request):
         try:
@@ -77,7 +85,7 @@ class CoursesList:
         except KeyError:
             return '200 OK', 'No courses have been added yet'
 
-
+@AppRoute(routes=routes, url='/copy_course/')
 class CopyCourse:
     def __call__(self, request):
         request_params = request['request_params']
